@@ -60,12 +60,12 @@
 					<section id="portfolio" class="two">
 						<div class="container">
 
-							<header>
+							<div class="portfolio-header">
 								<h2>Portfolio</h2>
-							</header>
-							<div class="search-container">
-								<input type="text" id="portfolio-search" placeholder="Search by category...">
-								<div id="active-filters"></div>
+								<div class="search-container">
+									<input type="text" id="portfolio-search" placeholder="Search category (Java, C etc.)">
+									<div id="active-filters"></div>
+								</div>
 							</div>
 
 							<!-- <p class="portfolio-text" style="text-align: justify;">Welcome to my portfolio website. Here you'll find a selection of projects I developed during my Software Engineering studies. Each project demonstrates my practical experience with various technologies and programming concepts.</p> -->
@@ -101,9 +101,15 @@
 								</div>
 								<div class="col-4 col-12-mobile">
 									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
+										<a href="https://github.com/dandeac26/Queue-management-system" class="image fit"><img src="images/QMApp.png" alt="" /></a>
 										<header>
-											<h3>Dolor Penatibus</h3>
+											<h3><a href="https://github.com/dandeac26/Queue-management-system" target="_blank">Queue Management Application</a></h3>
+											<ul class="portfolio-item-categories">
+												<li>C Threads</li>
+												<li>Thread-Synchronization</li>
+												<li>Windows API</li>
+												<li>GUI</li>
+											</ul>
 										</header>
 									</article>
 									<article class="item">
@@ -208,6 +214,11 @@
 						// If there are no filters, show all items
 						if (currentFilters.size === 0) {
 							item.style.display = '';
+							item.style.visibility = 'visible';
+							item.style.opacity = '1';
+							item.style.height = 'auto';
+							item.style.margin = '';
+							item.style.padding = '';
 							return;
 						}
 
@@ -215,7 +226,20 @@
 						const hasAllFilters = Array.from(currentFilters)
 							.every(filter => categories.includes(filter.toLowerCase()));
 						
-						item.style.display = hasAllFilters ? '' : 'none';
+						if (hasAllFilters) {
+							item.style.display = '';
+							item.style.visibility = 'visible';
+							item.style.opacity = '1';
+							item.style.height = 'auto';
+							item.style.margin = '';
+							item.style.padding = '';
+						} else {
+							item.style.visibility = 'hidden';
+							item.style.opacity = '0';
+							item.style.height = '0';
+							item.style.margin = '0';
+							item.style.padding = '0';
+						}
 					});
 				}
 
@@ -239,13 +263,55 @@
 					if (e.target.closest('.portfolio-item-categories li')) {
 						const category = e.target.textContent;
 						addFilter(category);
+						
+						// Add smooth scroll to portfolio section
+						const portfolioSection = document.getElementById('portfolio');
+						const headerOffset = 60; // Adjust this value based on your header height
+						const elementPosition = portfolioSection.getBoundingClientRect().top;
+						const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+						window.scrollTo({
+							top: offsetPosition,
+							behavior: 'smooth'
+						});
 					}
 					
 					if (e.target.classList.contains('remove-filter')) {
 						const category = e.target.dataset.category;
 						currentFilters.delete(category);
 						e.target.parentElement.remove();
-						updateVisibility();
+						
+						// Get current search text and apply both filters and search
+						const searchText = searchInput.value.toLowerCase();
+						
+						portfolioItems.forEach(item => {
+							const categories = Array.from(item.querySelectorAll('.portfolio-item-categories li'))
+								.map(li => li.textContent.toLowerCase());
+							
+							const matchesSearch = searchText === '' || categories.some(category => 
+								category.includes(searchText)
+							);
+							
+							const matchesFilters = currentFilters.size === 0 || 
+								Array.from(currentFilters).every(filter => 
+									categories.includes(filter.toLowerCase())
+								);
+							
+							if (matchesSearch && matchesFilters) {
+								item.style.display = '';
+								item.style.visibility = 'visible';
+								item.style.opacity = '1';
+								item.style.height = 'auto';
+								item.style.margin = '';
+								item.style.padding = '';
+							} else {
+								item.style.visibility = 'hidden';
+								item.style.opacity = '0';
+								item.style.height = '0';
+								item.style.margin = '0';
+								item.style.padding = '0';
+							}
+						});
 					}
 				});
 
@@ -261,7 +327,27 @@
 							category.includes(searchText)
 						);
 						
-						item.style.display = matchesSearch || searchText === '' ? '' : 'none';
+						// Check if item matches both search and active filters
+						const matchesFilters = currentFilters.size === 0 || 
+							Array.from(currentFilters).every(filter => 
+								categories.includes(filter.toLowerCase())
+							);
+						
+						// Show item only if it matches both search (or search is empty) AND all active filters
+						if ((matchesSearch || searchText === '') && matchesFilters) {
+							item.style.display = '';
+							item.style.visibility = 'visible';
+							item.style.opacity = '1';
+							item.style.height = 'auto';
+							item.style.margin = '';
+							item.style.padding = '';
+						} else {
+							item.style.visibility = 'hidden';
+							item.style.opacity = '0';
+							item.style.height = '0';
+							item.style.margin = '0';
+							item.style.padding = '0';
+						}
 					});
 				});
 			});

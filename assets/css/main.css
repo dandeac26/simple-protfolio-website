@@ -2867,10 +2867,11 @@ body{
 .active-filter {
     background-color: #e2768a;
     color: #fff;
-    padding: 0.3em 1em;
+    padding: 0.1em 0.6em;
     border-radius: 15px;
     display: flex;
     align-items: center;
+	font-size: 0.8em;
     gap: 0.5em;
 }
 
@@ -2885,4 +2886,65 @@ body{
 
 .portfolio-item.visible {
     display: block;
+}
+
+.portfolio-header {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    margin-bottom: 2em;
+}
+
+.portfolio-header h2 {
+    margin: 0;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.search-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 0;
+}
+
+#portfolio-search {
+    width: 300px;
+    padding: 0.2em;
+    margin: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
+
+#active-filters {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5em;
+}
+
+/* Add these styles */
+#portfolio .container {
+    min-height: 1200px; /* Adjust this value based on your content */
+    position: relative;
+}
+
+.item {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.item[style*="visibility: hidden"] {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    position: absolute; /* Add this to remove from flow */
+}
+
+.item[style*="visibility: visible"] {
+    opacity: 1;
+    visibility: visible;
+    position: relative; /* Add this to restore normal flow */
 }
