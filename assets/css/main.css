@@ -233,22 +233,37 @@ input, select, textarea {
 	  
 
 	  .portfolio-item-categories {
-		list-style: none; /* Removes default list styling */
-		padding: 5px; /* Adds padding inside the container */
-		margin: 10px 0 0; /* Adds space above the categories list */
-		text-align: left; /* Aligns the list items to the left */
-	  }
-	  
-	  .portfolio-item-categories li {
-		display: inline; /* Aligns items horizontally and respects container width */
-		background-color: #e2768ac2; /* Sets the background color for the boxes */
-		color: #fff; /* Sets the text color */
-		border-radius: 8px; /* Rounds the corners */
-		padding: 7px; /* Adds padding inside each box */
-		margin-top: 10px; /* Adds space above each item */
-		margin-left:15px;
-		font-size: 0.85em; /* Sets a slightly smaller font size */
-	  }
+		list-style: none;
+		padding: 0; /* Remove padding from the container */
+		padding-left: 3rem;
+		padding-right: 2rem;
+		margin: 10px -5px 0; /* Negative margin to offset item padding */
+		display: flex;
+		flex-wrap: wrap;
+	}
+	   
+	.portfolio-item-categories li {
+		display: inline-block;
+		background-color: #e2768ac2;
+		color: #fff;
+		border-radius: 8px;
+		padding: 8px 15px; /* More balanced padding */
+		margin: 5px; /* Even margin on all sides */
+		font-size: 0.9em; /* Slightly larger font */
+		white-space: nowrap;
+		transition: all 0.2s ease; /* Smooth transition for hover effects */
+	}
+	
+	/* Optional hover effect for better interaction */
+	.portfolio-item-categories li:hover {
+		background-color: #e2768a; /* Slightly darker/more opaque on hover */
+		transform: translateY(-2px); /* Slight lift effect */
+		box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+	}
+
+	.portfolio-text{	
+		font-size: 19pt;
+	}
 
 	.contact-icons {
 		list-style: none;
@@ -2766,6 +2781,7 @@ input, select, textarea {
 .about-content header {
     width: 100%;
     margin: 0 0 1em 0;
+	padding-left: 1em;
     text-align: left;
 }
 
@@ -2775,7 +2791,8 @@ input, select, textarea {
 }
 
 .about-text {
-	padding-right: 2em;
+	padding-right: 1em;
+	padding-left: 1em;
     color: rgba(255, 255, 255, 0.75);
     max-width: 100%; /* Ensure text doesn't overflow its container */
 }
@@ -2802,6 +2819,7 @@ input, select, textarea {
     .about-content {
         flex-direction: column;
         color: #fff;
+		padding-bottom: 0;
     }
     
     .about-text-container {
