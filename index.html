@@ -63,6 +63,10 @@
 							<header>
 								<h2>Portfolio</h2>
 							</header>
+							<div class="search-container">
+								<input type="text" id="portfolio-search" placeholder="Search by category...">
+								<div id="active-filters"></div>
+							</div>
 
 							<!-- <p class="portfolio-text" style="text-align: justify;">Welcome to my portfolio website. Here you'll find a selection of projects I developed during my Software Engineering studies. Each project demonstrates my practical experience with various technologies and programming concepts.</p> -->
 
@@ -136,7 +140,7 @@
 										</p>
 										<p style="text-align: justify;">
 											Beyond my academic pursuits, I have a keen interest in Linux Desktop and Open Source Software, 
-											video editing, software development and cybersecurity.
+											video editing, filming, software development and cybersecurity.
 										</p>
 									</div>
 								</div>
@@ -188,6 +192,80 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const searchInput = document.getElementById('portfolio-search');
+				const activeFilters = document.getElementById('active-filters');
+				const portfolioItems = document.querySelectorAll('.item');
+				let currentFilters = new Set();
+
+				// Function to update visibility of portfolio items
+				function updateVisibility() {
+					portfolioItems.forEach(item => {
+						const categories = Array.from(item.querySelectorAll('.portfolio-item-categories li'))
+							.map(li => li.textContent.toLowerCase());
+						
+						// If there are no filters, show all items
+						if (currentFilters.size === 0) {
+							item.style.display = '';
+							return;
+						}
+
+						// Check if item has all current filters
+						const hasAllFilters = Array.from(currentFilters)
+							.every(filter => categories.includes(filter.toLowerCase()));
+						
+						item.style.display = hasAllFilters ? '' : 'none';
+					});
+				}
+
+				// Function to add a filter
+				function addFilter(category) {
+					if (!currentFilters.has(category)) {
+						currentFilters.add(category);
+						const filterElement = document.createElement('div');
+						filterElement.className = 'active-filter';
+						filterElement.innerHTML = `
+							${category}
+							<span class="remove-filter" data-category="${category}">×</span>
+						`;
+						activeFilters.appendChild(filterElement);
+						updateVisibility();
+					}
+				}
+
+				// Handle clicks on category tags
+				document.addEventListener('click', function(e) {
+					if (e.target.closest('.portfolio-item-categories li')) {
+						const category = e.target.textContent;
+						addFilter(category);
+					}
+					
+					if (e.target.classList.contains('remove-filter')) {
+						const category = e.target.dataset.category;
+						currentFilters.delete(category);
+						e.target.parentElement.remove();
+						updateVisibility();
+					}
+				});
+
+				// Handle search input
+				searchInput.addEventListener('input', function(e) {
+					const searchText = e.target.value.toLowerCase();
+					
+					portfolioItems.forEach(item => {
+						const categories = Array.from(item.querySelectorAll('.portfolio-item-categories li'))
+							.map(li => li.textContent.toLowerCase());
+						
+						const matchesSearch = categories.some(category => 
+							category.includes(searchText)
+						);
+						
+						item.style.display = matchesSearch || searchText === '' ? '' : 'none';
+					});
+				});
+			});
+			</script>
 
 	</body>
 </html>

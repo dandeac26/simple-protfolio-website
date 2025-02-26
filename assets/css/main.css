@@ -252,6 +252,7 @@ input, select, textarea {
 		font-size: 0.9em; /* Slightly larger font */
 		white-space: nowrap;
 		transition: all 0.2s ease; /* Smooth transition for hover effects */
+		cursor: pointer; /* Add this line */
 	}
 	
 	/* Optional hover effect for better interaction */
@@ -2838,4 +2839,50 @@ input, select, textarea {
 
 body{
 	background-color: #181818;
+}
+
+.search-container {
+    margin-bottom: 2em;
+    text-align: left;
+}
+
+#portfolio-search {
+    width: 80%;
+    max-width: 300px;
+    padding: 0.5em;
+    margin: 1em auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+#active-filters {
+    margin: 1em 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 0.5em;
+}
+
+.active-filter {
+    background-color: #e2768a;
+    color: #fff;
+    padding: 0.3em 1em;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.active-filter .remove-filter {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.portfolio-item {
+    display: none;
+}
+
+.portfolio-item.visible {
+    display: block;
 }
