@@ -23,7 +23,12 @@ section, summary, time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: baseline;}
+	vertical-align: baseline;
+
+	
+     /* Use viewport height */
+
+}
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -31,6 +36,7 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
+	
 }
 
 ol, ul {
@@ -76,6 +82,7 @@ input, select, textarea {
 
 	html {
 		box-sizing: border-box;
+		
 	}
 
 	*, *:before, *:after {
@@ -89,6 +96,7 @@ input, select, textarea {
 		font-weight: 300;
 		line-height: 1.75em;
 		color: #ffffffbd; /* color text paragraph and IMPORTANT*/
+		
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -241,6 +249,41 @@ input, select, textarea {
 		margin-left:15px;
 		font-size: 0.85em; /* Sets a slightly smaller font size */
 	  }
+
+	.contact-icons {
+		list-style: none;
+		padding: 0;
+		margin: 2em auto;
+		text-align: left;
+		max-width: 400px;  /* Adjust this value to control the width of the container */
+	}
+	
+	.contact-icons li {
+		display: block;
+		margin: 1.5em 0;
+	}
+	
+	.contact-icons a {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		color: rgba(255, 255, 255, 0.7);
+		text-decoration: none;
+		border: none;
+		font-size: 1.2em;
+		transition: color 0.3s ease;
+		padding-left: 1em;  /* Reduced padding since we're using a max-width container */
+	}
+	
+	.contact-icons a:hover {
+		color: #fff;
+	}
+	
+	.contact-text {
+		margin-left: 0.5em;
+		font-size: 0.9em;
+	}
+	
 
 /* Container */
 
@@ -2306,6 +2349,8 @@ input, select, textarea {
 
 			#main > section.four {
 				background-color: #181818;
+				flex-grow: 1;
+				margin-bottom: 0;
 			}
 
 /* Wide */
@@ -2588,6 +2633,7 @@ input, select, textarea {
 				-ms-transform: translateX(0);
 				transform: translateX(0);
 			}
+			
 
 		/* Footer */
 
@@ -2661,6 +2707,7 @@ input, select, textarea {
 					padding: 0 1em;
 				}
 
+
 		/* Footer */
 
 			#footer .copyright li {
@@ -2676,3 +2723,99 @@ input, select, textarea {
 				}
 
 	}
+
+/* About section specific styles */
+#about {
+    position: relative;
+    overflow: hidden;
+}
+
+#about .container {
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    width: 100%;
+    height: 100%;
+}
+
+#about.three {
+    padding: 0;
+    background-color: #41494f;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.about-content {
+    display: flex;
+    flex-direction: row;
+    min-height: 100%;
+    position: relative;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+.about-text-container {
+    width: 60%; /* Set explicit width to match remaining space */
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box; /* Include padding in width calculation */
+    overflow-wrap: break-word; /* Ensure text wraps */
+    word-wrap: break-word;
+}
+
+.about-content header {
+    width: 100%;
+    margin: 0 0 1em 0;
+    text-align: left;
+}
+
+.about-content header h2 {
+    color: #fff;
+    margin: 0;
+}
+
+.about-text {
+	padding-right: 2em;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 100%; /* Ensure text doesn't overflow its container */
+}
+
+.about-image {
+    width: 40%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: auto;
+    overflow: hidden;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 736px) {
+    .about-content {
+        flex-direction: column;
+        color: #fff;
+    }
+    
+    .about-text-container {
+        width: 100%; /* Full width on mobile */
+        padding: 1em;
+    }
+    
+    .about-image {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+}
+
+body{
+	background-color: #181818;
+}
