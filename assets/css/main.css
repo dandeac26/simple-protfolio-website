@@ -2854,6 +2854,7 @@ body{
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1em;
+	
 }
 
 #active-filters {
@@ -2916,6 +2917,7 @@ body{
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 0.8em;
+	padding-left: 0.5em;
 }
 
 #active-filters {
@@ -2947,4 +2949,94 @@ body{
     opacity: 1;
     visibility: visible;
     position: relative; /* Add this to restore normal flow */
+}
+
+
+
+
+/* Volunteering Section Styles */
+#volunteering {
+    background-color: #2c2c2c;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#volunteering h2 {
+    color: #fff;
+}
+
+.volunteering-items {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    padding: 2em 0;
+}
+
+.volunteering-item {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2em;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.volunteering-item:hover {
+    transform: translateY(-5px);
+}
+
+.volunteering-image {
+    flex: 0 0 500px;  /* Increased from 300px */
+    height: 350px;    /* Increased from 200px */
+}
+
+.volunteering-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;    /* Added this line to crop from top */
+    border-radius: 4px;
+}
+
+.volunteering-text {
+    flex: 1;
+}
+
+.volunteering-text h3 {
+    color: #fff;
+    margin-bottom: 0.5em;
+}
+
+.volunteering-text p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 980px) {
+    .volunteering-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .volunteering-image {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .volunteering-text {
+        padding-top: 1em;
+    }
+}
+
+@media screen and (max-width: 736px) {
+    .volunteering-items {
+        gap: 2em;
+    }
+
+    .volunteering-item {
+        padding: 1.5em;
+    }
 }
